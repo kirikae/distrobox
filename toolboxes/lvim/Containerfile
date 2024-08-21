@@ -1,0 +1,15 @@
+FROM fedora:40
+
+LABEL com.github.containers.toolbox="true" \
+      usage="Portable LunarVim (lvim)" \
+      summary="A portable Fedora-based install of LunarVim. See: https://www.lunarvim.org/" \
+      maintainer="22813189+kirikae@users.noreply.github.com"
+
+COPY ./toolboxes/lvim/packages /toolbox-packages
+
+RUN dnf -y upgrade && \
+    dnf -y install $(<toolbox-packages) && \
+    dnf clean all
+
+RUN rm /toolbox-packages
+
